@@ -21,43 +21,41 @@ public class ShortcutOverlay.ShortcutsView : Gtk.Grid {
     private static Gee.ArrayList<ShortcutEntry> window_entries;
     private static Gee.ArrayList<ShortcutEntry> workspace_entries;
 
-    private const string SCHEMA_WM = "org.gnome.desktop.wm.keybindings";
-    private const string SCHEMA_GALA = "org.pantheon.desktop.gala.keybindings";
-    private const string SCHEMA_MEDIA = "org.gnome.settings-daemon.plugins.media-keys";
-    private const string SCHEMA_MUTTER = "org.gnome.mutter.keybindings";
+    private const string SCHEMA_WM = "org.mate.Marco.window-keybindings";
+    private const string SCHEMA_MARCO = "org.mate.Marco.global-keybindings";
+    private const string SCHEMA_MEDIA = "org.mate.SettingsDaemon.plugins.media-keys";
 
     private static Gtk.SizeGroup size_group;
 
     static construct {
         system_entries = new Gee.ArrayList<ShortcutEntry> ();
-        system_entries.add (new ShortcutEntry (_("Applications Menu:"), SCHEMA_WM, "panel-main-menu"));
-        system_entries.add (new ShortcutEntry (_("Cycle display mode:"), SCHEMA_MUTTER, "switch-monitor"));
-        system_entries.add (new ShortcutEntry (_("Zoom in:"), SCHEMA_GALA, "zoom-in"));
-        system_entries.add (new ShortcutEntry (_("Zoom out:"), SCHEMA_GALA, "zoom-out"));
+        system_entries.add (new ShortcutEntry (_("Applications Menu:"), SCHEMA_MARCO, "panel-main-menu"));
+        /* system_entries.add (new ShortcutEntry (_("Cycle display mode:"), SCHEMA_MEDIA, "switch-monitor")); */
+        system_entries.add (new ShortcutEntry (_("Magnifier:"), SCHEMA_MEDIA, "magnifier"));
         system_entries.add (new ShortcutEntry (_("Lock screen:"), SCHEMA_MEDIA, "screensaver"));
         system_entries.add (new ShortcutEntry (_("Log out:"), SCHEMA_MEDIA, "logout"));
 
         screenshot_entries = new Gee.ArrayList<ShortcutEntry> ();
-        screenshot_entries.add (new ShortcutEntry (_("Grab the whole screen:"), SCHEMA_MEDIA, "screenshot"));
-        screenshot_entries.add (new ShortcutEntry (_("Grab the current window:"), SCHEMA_MEDIA, "window-screenshot"));
-        screenshot_entries.add (new ShortcutEntry (_("Select an area to grab:"), SCHEMA_MEDIA, "area-screenshot"));
+        screenshot_entries.add (new ShortcutEntry (_("Grab the whole screen:"), SCHEMA_MARCO, "run-command-screenshot"));
+        screenshot_entries.add (new ShortcutEntry (_("Grab the current window:"), SCHEMA_MARCO, "run-command-window-screenshot"));
+        /* screenshot_entries.add (new ShortcutEntry (_("Select an area to grab:"), SCHEMA_MARCO, "area-screenshot")); */
 
         window_entries = new Gee.ArrayList<ShortcutEntry> ();
-        window_entries.add (new ShortcutEntry (_("Cycle windows:"), SCHEMA_WM, "switch-windows"));
+        window_entries.add (new ShortcutEntry (_("Cycle windows:"), SCHEMA_MARCO, "switch-windows"));
         window_entries.add (new ShortcutEntry (_("Toggle maximized:"), SCHEMA_WM, "toggle-maximized"));
-        window_entries.add (new ShortcutEntry (_("Tile left:"), SCHEMA_MUTTER, "toggle-tiled-left"));
-        window_entries.add (new ShortcutEntry (_("Tile right:"), SCHEMA_MUTTER, "toggle-tiled-right"));
+        window_entries.add (new ShortcutEntry (_("Tile left:"), SCHEMA_WM, "tile-to-side-w"));
+        window_entries.add (new ShortcutEntry (_("Tile right:"), SCHEMA_WM, "tile-to-side-e"));
         window_entries.add (new ShortcutEntry (_("Move to left workspace:"), SCHEMA_WM, "move-to-workspace-left"));
         window_entries.add (new ShortcutEntry (_("Move to right workspace:"), SCHEMA_WM, "move-to-workspace-right"));
-        window_entries.add (new ShortcutEntry (_("Picture in Picture Mode:"), SCHEMA_GALA, "pip"));
+        /* window_entries.add (new ShortcutEntry (_("Picture in Picture Mode:"), SCHEMA_MARCO, "pip")); */
 
         workspace_entries = new Gee.ArrayList<ShortcutEntry> (); 
-        workspace_entries.add (new ShortcutEntry (_("Multitasking View:"), SCHEMA_WM, "show-desktop"));
-        workspace_entries.add (new ShortcutEntry (_("Switch left:"), SCHEMA_WM, "switch-to-workspace-left"));
-        workspace_entries.add (new ShortcutEntry (_("Switch right:"), SCHEMA_WM, "switch-to-workspace-right"));
-        workspace_entries.add (new ShortcutEntry (_("Switch to first:"), SCHEMA_GALA, "switch-to-workspace-first"));
-        workspace_entries.add (new ShortcutEntry (_("Switch to new:"), SCHEMA_GALA, "switch-to-workspace-last"));
-        workspace_entries.add (new ShortcutEntry (_("Cycle workspaces:"), SCHEMA_GALA, "cycle-workspaces-next"));
+        workspace_entries.add (new ShortcutEntry (_("Multitasking View:"), SCHEMA_MARCO, "show-desktop"));
+        workspace_entries.add (new ShortcutEntry (_("Switch left:"), SCHEMA_MARCO, "switch-to-workspace-left"));
+        workspace_entries.add (new ShortcutEntry (_("Switch right:"), SCHEMA_MARCO, "switch-to-workspace-right"));
+        workspace_entries.add (new ShortcutEntry (_("Switch to first:"), SCHEMA_MARCO, "switch-to-workspace-1"));
+        /* workspace_entries.add (new ShortcutEntry (_("Switch to new:"), SCHEMA_MARCO, "switch-to-workspace-last")); */
+        /* workspace_entries.add (new ShortcutEntry (_("Cycle workspaces:"), SCHEMA_MARCO, "cycle-workspaces-next")); */
     }
 
     construct {

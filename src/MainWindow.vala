@@ -30,19 +30,12 @@ public class ShortcutOverlay.MainWindow : Gtk.Window {
         css_provider.load_from_resource ("io/elementary/shortcut-overlay/application.css");
         Gtk.StyleContext.add_provider_for_screen (get_screen (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
 
+        /* FIXME: Since we disable CSD titlebar, we don't get the Keyboard
+           Settings button, so we should add it within the window itself. */
         var settings_button = new Gtk.Button.from_icon_name ("preferences-system-symbolic", Gtk.IconSize.MENU);
         settings_button.tooltip_text = _("Keyboard Settings…");
         settings_button.valign = Gtk.Align.CENTER;
         settings_button.get_style_context ().add_class ("titlebutton");
-
-        var headerbar = new Gtk.HeaderBar ();
-        headerbar.has_subtitle = false;
-        headerbar.set_show_close_button (true);
-        headerbar.pack_end (settings_button);
-
-        var headerbar_style_context =  headerbar.get_style_context ();
-        headerbar_style_context.add_class (Gtk.STYLE_CLASS_FLAT);
-        headerbar_style_context.add_class ("default-decoration");
 
         var shortcuts_view = new ShortcutsView ();
         shortcuts_view.margin = 12;
@@ -50,12 +43,12 @@ public class ShortcutOverlay.MainWindow : Gtk.Window {
 
         add (shortcuts_view);
         get_style_context ().add_class ("rounded");
-        set_titlebar (headerbar);
         skip_taskbar_hint = true;
 
         settings_button.clicked.connect (() => {
             try {
-                AppInfo.launch_default_for_uri ("settings://input/keyboard/shortcuts", null);
+                AppInfo keybindings = AppInfo.create_from_commandline ("mate-keybinding-properties", null, NONE);
+                keybindings.launch (null, null);
             } catch (Error e) {
                 warning (e.message);
             }
