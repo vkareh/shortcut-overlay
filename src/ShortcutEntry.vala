@@ -61,7 +61,7 @@ public class ShortcutEntry : Object {
 
         string[] arr = {};
         if (Gdk.ModifierType.SUPER_MASK in accel_mods) {
-            arr += "⌘";
+            arr += _("Super");
         }
 
         if (Gdk.ModifierType.SHIFT_MASK in accel_mods) {

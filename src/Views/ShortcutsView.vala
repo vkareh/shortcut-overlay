@@ -49,7 +49,7 @@ public class ShortcutOverlay.ShortcutsView : Gtk.Grid {
         window_entries.add (new ShortcutEntry (_("Move to right workspace:"), SCHEMA_WM, "move-to-workspace-right"));
         /* window_entries.add (new ShortcutEntry (_("Picture in Picture Mode:"), SCHEMA_MARCO, "pip")); */
 
-        workspace_entries = new Gee.ArrayList<ShortcutEntry> (); 
+        workspace_entries = new Gee.ArrayList<ShortcutEntry> ();
         workspace_entries.add (new ShortcutEntry (_("Multitasking View:"), SCHEMA_MARCO, "show-desktop"));
         workspace_entries.add (new ShortcutEntry (_("Switch left:"), SCHEMA_MARCO, "switch-to-workspace-left"));
         workspace_entries.add (new ShortcutEntry (_("Switch right:"), SCHEMA_MARCO, "switch-to-workspace-right"));
